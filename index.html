@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel='stylesheet' href='css/global.css'></link>
+<script type='text/javascript' src='js/es5/knockout.js'></script>
+<script type='text/javascript' src='js/es5/knockout-es5.js'></script>
+<script type='text/javascript' src='js/traceur.js'></script>
+<script type='text/javascript' src='js/es6-module-loader.js'></script>
+<script type='text/javascript' src='js/system.js'></script>
+<script type='text/javascript' src='js/init.js'></script>
+<script type='text/html' id='object-viewer-subscriptions' data-template-src='templates/object-viewer-subscriptions.html'></script>
+</head>
+<body>
+<nav class="nav-main">
+  <div class="nav-logo">coeo</div>
+  <div class="nav-section">People</div>
+  <hr />
+  <ul class="nav-list">
+    <!-- ko if: client.user -->
+    <li data-bind="click: client.select.bind(client), css: { active: client.currentTree == client.user }">You</li>
+    <!-- /ko -->
+    <!-- ko foreach: client.buddies -->
+    <li data-bind="click: $root.client.select.bind($root.client), css: { active: $root.client.currentTree == $data }">You</li>
+    <!-- /ko -->
+  </ul>
+</nav>
+<main class="content-main">
+<div class="center" data-bind="if: client.currentTree == ''">
+  <div class="content-block login">
+    <div class="content-head">
+      Login
+    </div>
+    <div class="content-body">
+      <form data-bind="with: client" class="form-table">
+        <div class="input-group">
+          <div class="input-label">User name</div>
+          <div class="input-control"><input type='text' data-bind="value: user" /></div>
+        </div>
+        <div class="input-group">
+          <div class="input-label">Password</div>
+          <div class="input-control"><input type='password' data-bind="value: password" /></div>
+        </div>
+        <div class="input-group">
+          <div class="input-label"></div>
+          <div class="input-control"><button data-bind='click: connect.bind($data)'>Connect</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="user-content" data-bind="if: client.currentTree != ''">
+  <div class="user-head">
+    <div class="user-name" data-bind="text: client.currentTree"></div>
+  </div>
+  <div class="user-body">
+  </div>
+</div>
+</main>
+</body>
+</html>

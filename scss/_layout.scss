@@ -1,0 +1,65 @@
+// Definitions that influence the positioning and sizing of elements
+@mixin pull-down {
+  position: absolute;
+  bottom: 0;
+}
+
+// Scroll mixins
+@mixin scroll-x {
+  overflow-y: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch
+}
+@mixin scroll-y {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch
+}
+
+// Flexbox mixins
+@mixin flx-h {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+@mixin flx-v {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
+
+@mixin flx-strech {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+@mixin flx-nostrech {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+@mixin center {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  display: block;
+  margin: auto;
+}
+
+.form-table {
+  display: table;
+  border-collapse: collapse;
+}
+.input-group {
+  display: table-row;
+}
+.input-label, .input-control {
+  border: 10px solid rgba(0,0,0,0);
+  display: table-cell;
+}
+.input-label {
+  text-align: right;
+}

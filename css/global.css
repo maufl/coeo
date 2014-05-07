@@ -1,0 +1,103 @@
+.form-table {
+  display: table;
+  border-collapse: collapse; }
+
+.input-group {
+  display: table-row; }
+
+.input-label, .input-control {
+  border: 10px solid rgba(0, 0, 0, 0);
+  display: table-cell; }
+
+.input-label {
+  text-align: right; }
+
+@font-face {
+  font-family: 'Varela Round';
+  src: url("../fonts/VarelaRound-Regular.ttf") format("truetype"); }
+
+.content-block {
+  background: white;
+  border-radius: 2px;
+  display: inline-block;
+  box-shadow: 0px 0px 3px #ddd; }
+  .content-block .content-head {
+    border-bottom: 1px solid #eee;
+    padding: 15px;
+    color: #999;
+    font-size: 1.2em; }
+  .content-block .content-body {
+    padding: 15px;
+    color: #666; }
+
+.user-content {
+  color: #222; }
+  .user-content .user-head {
+    padding: 20px;
+    border-bottom: 1px solid #eee; }
+    .user-content .user-head .user-name {
+      font-size: 3.5em; }
+
+input {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 3px;
+  box-shadow: inset 0 0 1px #ddd; }
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Varela Round', Verdana, Arial, sans-serif; }
+
+html, body {
+  height: 100%; }
+
+body {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row; }
+
+.nav-main {
+  width: 200px;
+  height: 100%;
+  background: #222222;
+  color: #333333; }
+  .nav-main .nav-logo {
+    text-align: center;
+    font-size: 2.5em;
+    margin: 25px 0px 15px 0px;
+    color: white; }
+  .nav-main .nav-section {
+    font-size: 1.1em;
+    margin: 10px 0px 5px 0px;
+    padding-left: 20px; }
+  .nav-main hr {
+    border: 1px solid #333333; }
+  .nav-main ul.nav-list {
+    list-style: none;
+    margin: 10px 20px;
+    font-size: 1.2em; }
+    .nav-main ul.nav-list li {
+      cursor: pointer; }
+    .nav-main ul.nav-list li.active {
+      color: white; }
+
+.content-main {
+  background: #f6f6f6;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 100%;
+  position: relative; }
+
+.login {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  display: block;
+  margin: auto;
+  height: 250px;
+  width: 300px; }
