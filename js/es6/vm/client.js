@@ -1,6 +1,6 @@
 import { Client } from 'es6/fosp/client'
 
-export class ClientViewModel extends Client {
+export class ClientVM extends Client {
   constructor() {
     super()
     this.user = ''
