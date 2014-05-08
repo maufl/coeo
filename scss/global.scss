@@ -67,5 +67,9 @@ body {
 .login {
   @include center;
   height: 250px;
-  width: 350px;
+  width: 380px;
+
+  .input-label {
+    width: 190px;
+  }
 }

@@ -69,6 +69,10 @@
     padding: 15px;
     color: #999;
     font-size: 1.2em; }
+    .content-block .content-head span {
+      cursor: pointer; }
+    .content-block .content-head span.active {
+      color: #333; }
   .content-block .content-body {
     padding: 15px;
     color: #666; }
@@ -143,4 +147,6 @@ body {
   display: block;
   margin: auto;
   height: 250px;
-  width: 350px; }
+  width: 380px; }
+  .login .input-label {
+    width: 190px; }

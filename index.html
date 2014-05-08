@@ -28,21 +28,29 @@
 <div class="center" data-bind="if: client.currentTree == ''">
   <div class="content-block login">
     <div class="content-head">
-      Login
+      <span data-bind='click: function(){ client.register = false }, css: { active: !client.register }' >Login</span>&nbsp;or&nbsp;<span data-bind='click: function(){ client.register = true }, css: { active: client.register }'>Sign up</span>
     </div>
     <div class="content-body">
       <form data-bind="with: client" class="form-table">
         <div class="input-group">
           <div class="input-label">User name</div>
-          <div class="input-control"><input type='text' data-bind="value: user" /></div>
+          <div class="input-control"><input type='text' data-bind="value: user" placeholder="alice@maufl.de" /></div>
         </div>
         <div class="input-group">
           <div class="input-label">Password</div>
           <div class="input-control"><input type='password' data-bind="value: password" /></div>
         </div>
-        <div class="input-group">
+        <div class="input-group" data-bind="visible: register">
+          <div class="input-label">Confirm Password</div>
+          <div class="input-control"><input type='password' data-bind="value: passwordConfirmation" /></div>
+        </div>
+        <div class="input-group" data-bind="visible: !register">
           <div class="input-label"></div>
-          <div class="input-control"><button class='btn-blue' data-bind='click: connect.bind($data)'>Connect</button></div>
+          <div class="input-control"><button class='btn-blue' data-bind='click: connect.bind($data)'>Login</button></div>
+        </div>
+        <div class="input-group" data-bind="visible: register">
+          <div class="input-label"></div>
+          <div class="input-control"><button class='btn-blue' data-bind='click: signup.bind($data)'>Sign up</button></div>
         </div>
       </form>
     </div>
