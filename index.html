@@ -17,10 +17,10 @@
   <hr />
   <ul class="nav-list">
     <!-- ko if: client.user -->
-    <li data-bind="click: client.select.bind(client), css: { active: client.currentTree == client.user }">You</li>
+    <li data-bind="click: client.select.bind(client, client.user), css: { active: client.currentTree === client.user }">You</li>
     <!-- /ko -->
-    <!-- ko foreach: client.buddies -->
-    <li data-bind="click: $root.client.select.bind($root.client), css: { active: $root.client.currentTree == $data }">You</li>
+    <!-- ko foreach: client.buddyList -->
+    <li data-bind="click: $root.client.select.bind($root.client, $data.ID), css: { active: $root.client.currentTree === $data.ID }, text: $data.name"></li>
     <!-- /ko -->
   </ul>
 </nav>

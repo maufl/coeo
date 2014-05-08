@@ -1,4 +1,5 @@
 import { Client } from 'es6/fosp/client'
+import { BuddyListVM } from 'es6/vm/buddy-list'
 
 export class ClientVM extends Client {
   constructor() {
@@ -10,7 +11,7 @@ export class ClientVM extends Client {
     this.register = false
     this.insecure = false
     this.currentTree = ''
-    this.buddies = []
+    this.buddyList = new BuddyListVM(this)
 
     ko.track(this)
   }
@@ -49,10 +50,11 @@ export class ClientVM extends Client {
     this.currentTree = this.user
     this.setupProfile()
     this.setupBuddiesGroups()
+    this.buddyList.load()
   }
 
   select(tree) {
-    if (tree instanceof String) {
+    if (typeof tree === "string") {
       this.currentTree = tree
     }
   }
