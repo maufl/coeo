@@ -12,6 +12,49 @@
 .input-label {
   text-align: right; }
 
+.btn, .btn-blue, .btn-green, .btn-yellow, .btn-red, .btn-orange, .btn-petrol {
+  background: #f6f6f6;
+  border: 1px solid #ededed;
+  border-radius: 3px;
+  padding: 3px;
+  cursor: pointer;
+  font-size: 0.9em;
+  box-shadow: 0 0 1px #ccc; }
+
+.btn-blue, .btn-green, .btn-yellow, .btn-red, .btn-orange, .btn-petrol {
+  color: white;
+  border: 1px solid rgba(0, 0, 0, 0); }
+
+.btn-blue {
+  background: #40c7ed; }
+  .btn-blue:hover {
+    background: #15b7e5; }
+
+.btn-green {
+  background: #9dd661; }
+  .btn-green:hover {
+    background: #84cc38; }
+
+.btn-yellow {
+  background: #ffd033; }
+  .btn-yellow:hover {
+    background: #ffc400; }
+
+.btn-orange {
+  background: #ff8758; }
+  .btn-orange:hover {
+    background: #ff6225; }
+
+.btn-red {
+  background: #f3392e; }
+  .btn-red:hover {
+    background: #e1190d; }
+
+.btn-petrol {
+  background: #00f1e4; }
+  .btn-petrol:hover {
+    background: #00beb4; }
+
 @font-face {
   font-family: 'Varela Round';
   src: url("../fonts/VarelaRound-Regular.ttf") format("truetype"); }
@@ -100,4 +143,4 @@ body {
   display: block;
   margin: auto;
   height: 250px;
-  width: 300px; }
+  width: 350px; }
