@@ -17,7 +17,7 @@ export class Connection extends EventEmitter {
 
     var emitMessage = (message) => {
       var data = message.binaryData || message.utf8Data || message.data;
-      var msg = Parser.parseMessage(this, data, (err, msg) => {
+      var msg = Parser.parseMessage(data, (err, msg) => {
         if (err) {
           console.error('Error while parsing message: ' + err)
           console.error(err.stack)
@@ -122,7 +122,7 @@ export class Connection extends EventEmitter {
       }
     }
     catch(e) {
-      console.error(e.stack);
+      console.error(e);
     }
     return msg;
   }

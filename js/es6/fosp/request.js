@@ -8,7 +8,7 @@ export class Request extends Message {
     this.timeoutHandle = null;
     this.timeout = 15000;
     this.defer = {}
-    this.promise = new Promise((res, rej) => { defer.resolve = res; defer.reject = rej });
+    this.promise = new Promise((res, rej) => { this.defer.resolve = res; this.defer.reject = rej });
   }
 
   serializeScalpToString() {

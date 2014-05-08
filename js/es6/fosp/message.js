@@ -32,8 +32,8 @@ export class Message extends EventEmitter {
     this.event = msg.event
     this.uri = msg.uri
     this.status = msg.status
-    this.header = msg.headers || {}
-    this.boyd = msg.body || null
+    this.headers = msg.headers || {}
+    this.body = msg.body || null
   }
 
   serializeHeadersToString() {

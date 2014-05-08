@@ -146,33 +146,33 @@ var messageHashToObject = function( msg) {
       return new Notification(msg)
 }
 
-export class Parser {
-    parseMessage(raw, callback) {
-      try {
-        var msg = null;
-        if ( raw instanceof ArrayBuffer ) {
-          msg = parseMessageBuffer(raw)
-          callback(null, messageHashToObject(msg))
-        }
-        else if ( typeof raw === 'string' ) {
-          msg = parseMessageString(raw)
-          callback(null, messageHashToObject(msg))
-        }
-        else if ( typeof Blob === 'function' && raw instanceof Blob ) {
-          var fr = new FileReader()
-          fr.onload = function() {
-            console.log(fr.result)
-            msg = parseMessageBuffer(fr.result)
-            callback(null, messageHashToObject(msg))
-          }
-          fr.readAsArrayBuffer(raw)
-        }
-        else
-          throw new Error('Unable to parse ' + raw.toString() + ' of type ' + typeof raw)
+export class Parser {}
 
+Parser.parseMessage = (raw, callback) => {
+  try {
+    var msg = null;
+    if ( raw instanceof ArrayBuffer ) {
+      msg = parseMessageBuffer(raw)
+      callback(null, messageHashToObject(msg))
+    }
+    else if ( typeof raw === 'string' ) {
+      msg = parseMessageString(raw)
+      callback(null, messageHashToObject(msg))
+    }
+    else if ( typeof Blob === 'function' && raw instanceof Blob ) {
+      var fr = new FileReader()
+      fr.onload = function() {
+        console.log(fr.result)
+        msg = parseMessageBuffer(fr.result)
+        callback(null, messageHashToObject(msg))
       }
-      catch (e) {
-        callback(e, null)
-      }
+      fr.readAsArrayBuffer(raw)
+    }
+    else
+      throw new Error('Unable to parse ' + raw.toString() + ' of type ' + typeof raw)
+
+  }
+  catch (e) {
+    callback(e, null)
   }
 }

@@ -19,13 +19,17 @@ export class ClientViewModel extends Client {
     this.host = domainName;
     console.log(this)
     this.openConnection().then(() => {
-      this.connection.sendConnect({}, {version: '0.1'}).promise
-    }).then(() => {
-      this.connection.sendAuthenticate({}, {name: userName, password: this.password}).promise
-    }).then(() => {
+      var req = this.connection.sendConnect({}, {version: '0.1'})
+      return req.promise
+    }).then((response) => {
+      console.log(response.short())
+      return this.connection.sendAuthenticate({}, {name: userName, password: this.password}).promise
+    }).then((response) => {
+      console.log(response.short())
       this.currentTree = this.user
       console.log('Loged in!')
     }).catch((err) => {
+      console.log("Login failed")
       console.error(err)
     })
   }
