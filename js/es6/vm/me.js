@@ -14,7 +14,7 @@ export class MeVM extends TreeVM {
     console.log(files)
     if (files instanceof FileList && files.length === 1) {
       var file = files[0]
-      var reader = FileReader();
+      var reader = new FileReader();
       reader.onload = () => {
         this.client.connection.sendUpdate(this.ID + "/social/me/avatar", {}, { attachment: { name: file.name, type: file.type }}).promise.then(() => {
           return this.client.connection.sendWrite(this.ID + "/social/me/avatar", {}, reader.result).promise
