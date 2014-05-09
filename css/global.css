@@ -56,6 +56,19 @@
     background: #00beb4; }
 
 @font-face {
+  font-family: 'Entypo';
+  src: url("../fonts/entypo.eot");
+  src: url("../fonts/entypo.woff") format("woff"), url("../fonts/entypo.ttf") format("truetype"); }
+
+span.entypo {
+  font-family: 'Entypo';
+  font-size: 1.5em;
+  display: inline-block;
+  padding: 3px; }
+  span.entypo.entypo-user:after {
+    content: '\1F464'; }
+
+@font-face {
   font-family: 'Varela Round';
   src: url("../fonts/VarelaRound-Regular.ttf") format("truetype"); }
 
