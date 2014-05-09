@@ -70,8 +70,8 @@
 <!-- ko if: client.currentTree.isMe() -->
 <div class="user-content">
   <div class="user-head content-block">
-      <img class="avatar-big" data-bind="imgSrc: client.currentTree.avatar"/>
-      <span class="user-name" data-bind="text: client.currentTree.displayName()"></span>
+    <img class="avatar-big" data-bind="imgSrc: client.me.avatar, drop: { callback: client.me.uploadAvatar.bind(client.me) }, dragenter: { preventDefault: true }, dragover: {preventDefault: true}, dragleave: { preventDefault: true }"/>
+    <span class="user-name" data-bind="text: client.me.displayName(), contenteditable: client.me.updateName.bind(client.me)"></span>
   </div>
   <div class="user-body">
   </div>

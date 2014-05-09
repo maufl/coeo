@@ -24,7 +24,7 @@ export class Request extends Message {
     if (typeof(this.request) !== "string" || Message.REQUESTS.indexOf(this.request) < 0)
       throw new Error("Unknown request: " + this.request);
 
-    if ('WRITE' === this.request && this.body !== null && ! (this.body instanceof Message.BufferClass))
+    if ('WRITE' === this.request && this.body !== null && ! (this.body instanceof ArrayBuffer))
       throw new Error("Invalid body for WRITE request: " + typeof this.body)
 
     if (typeof this.uri !== "object")

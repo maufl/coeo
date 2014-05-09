@@ -51,6 +51,7 @@ export class ClientVM extends Client {
 
   postLogin() {
     this.me = new MeVM(this, this.user)
+    this.me.load()
     this.select(this.me)
     this.setupProfile()
     this.setupBuddiesGroups()

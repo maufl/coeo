@@ -1,6 +1,6 @@
 
 var defaultAvatar = new Image();
-defaultAvatar.src = '../../../images/defaultAvatar.png';
+defaultAvatar.src = 'images/defaultAvatar.png';
 
 export class TreeVM {
   constructor(client, ID) {
@@ -25,12 +25,16 @@ export class TreeVM {
   }
 
   load() {
+    this.loadName()
+    this.loadAvatar()
+  }
+
+  loadName() {
     this.client.connection.sendSelect(this.ID + "/social/me").promise.then((response) => {
       if (this.name === '') {
         this.name = response.body.data.name
       }
     })
-    this.loadAvatar()
   }
 
   loadAvatar() {
