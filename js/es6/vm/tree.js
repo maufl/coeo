@@ -1,6 +1,6 @@
 
 var defaultAvatar = new Image();
-defaultAvatar.src = '/images/defaultAvatar.png';
+defaultAvatar.src = '../../../images/defaultAvatar.png';
 
 export class TreeVM {
   constructor(client, ID) {
@@ -30,7 +30,7 @@ export class TreeVM {
         this.name = response.body.data.name
       }
     })
-    loadAvatar()
+    this.loadAvatar()
   }
 
   loadAvatar() {
