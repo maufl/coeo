@@ -1,3 +1,4 @@
+import { BuddyVM } from 'es6/vm/buddy'
 
 export class BuddyListVM extends Array {
   constructor(client) {
@@ -9,8 +10,9 @@ export class BuddyListVM extends Array {
     this.client.connection.sendSelect(this.client.user + "/config/buddies").promise.then((response) => {
       var buddies = response.body.data || {}
       for (var ID in buddies) {
-        var buddy = buddies[ID]
-        buddy.ID = ID
+        var buddy = new BuddyVM(this.client, ID)
+        buddy.name = buddies[ID].name
+        buddy.load()
         this.push(buddy)
       }
     })

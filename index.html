@@ -4,6 +4,7 @@
 <link rel='stylesheet' href='css/global.css'></link>
 <script type='text/javascript' src='js/es5/knockout.js'></script>
 <script type='text/javascript' src='js/es5/knockout-es5.js'></script>
+<script type='text/javascript' src='js/es5/ko/imgSrc.js'></script>
 <script type='text/javascript' src='js/traceur.js'></script>
 <script type='text/javascript' src='js/es6-module-loader.js'></script>
 <script type='text/javascript' src='js/system.js'></script>
@@ -16,16 +17,22 @@
   <div class="nav-section">People</div>
   <hr />
   <ul class="nav-list">
-    <!-- ko if: client.user -->
-    <li data-bind="click: client.select.bind(client, client.user), css: { active: client.currentTree === client.user }">You</li>
+    <!-- ko if: client.me-->
+    <li data-bind="click: client.select.bind(client, client.me), css: { active: client.currentTree === client.me }">
+      <img class="avatar-small" data-bind="imgSrc: client.me.avatar" />
+      <span>You</span>
+    </li>
     <!-- /ko -->
     <!-- ko foreach: client.buddyList -->
-    <li data-bind="click: $root.client.select.bind($root.client, $data.ID), css: { active: $root.client.currentTree === $data.ID }, text: $data.name"></li>
+    <li data-bind="click: $root.client.select.bind($root.client, $data), css: { active: $root.client.currentTree === $data }">
+      <img class="avatar-small" data-bind="imgSrc: $data.avatar" />
+      <span data-bind="text: $data.displayName()"></span>
+    </li>
     <!-- /ko -->
   </ul>
 </nav>
 <main class="content-main">
-<div class="center" data-bind="if: client.currentTree == ''">
+<div class="center" data-bind="if: client.currentTree === null">
   <div class="content-block login">
     <div class="content-head">
       <span data-bind='click: function(){ client.register = false }, css: { active: !client.register }' >Login</span>&nbsp;or&nbsp;<span data-bind='click: function(){ client.register = true }, css: { active: client.register }'>Sign up</span>
@@ -56,13 +63,28 @@
     </div>
   </div>
 </div>
-<div class="user-content" data-bind="if: client.currentTree != ''">
-  <div class="user-head">
-    <div class="user-name" data-bind="text: client.currentTree"></div>
+<!-- ko if: client.currentTree -->
+<!-- ko if: client.currentTree.isMe() -->
+<div class="user-content">
+  <div class="user-head content-block">
+      <img class="avatar-big" data-bind="imgSrc: client.currentTree.avatar"/>
+      <span class="user-name" data-bind="text: client.currentTree.displayName()"></span>
   </div>
   <div class="user-body">
   </div>
 </div>
+<!-- /ko -->
+<!-- ko if: client.currentTree.isBuddy() -->
+<div class="user-content">
+  <div class="user-head content-block">
+      <img class="avatar-big" data-bind="imgSrc: client.currentTree.avatar"/>
+      <span class="user-name" data-bind="text: client.currentTree.displayName()"></span>
+  </div>
+  <div class="user-body">
+  </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
 </main>
 </body>
 </html>

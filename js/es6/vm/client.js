@@ -1,16 +1,19 @@
 import { Client } from 'es6/fosp/client'
 import { BuddyListVM } from 'es6/vm/buddy-list'
+import { TreeVM } from './tree'
+import { MeVM } from './me'
 
 export class ClientVM extends Client {
   constructor() {
     super()
     this.user = ''
+    this.me = null
     this.userName = ''
     this.password = ''
     this.passwordConfirmation = ''
     this.register = false
     this.insecure = false
-    this.currentTree = ''
+    this.currentTree = null
     this.buddyList = new BuddyListVM(this)
 
     ko.track(this)
@@ -47,20 +50,21 @@ export class ClientVM extends Client {
   }
 
   postLogin() {
-    this.currentTree = this.user
+    this.me = new MeVM(this, this.user)
+    this.select(this.me)
     this.setupProfile()
     this.setupBuddiesGroups()
     this.buddyList.load()
   }
 
   select(tree) {
-    if (typeof tree === "string") {
+    if (tree instanceof TreeVM) {
       this.currentTree = tree
     }
   }
 
   setupProfile() {
-    var createMe = () => { return this.connection.sendCreate(this.user + "/social/me", {}, { data: { name: this.user } }).promise }
+    var createMe = () => { return this.connection.sendCreate(this.user + "/social/me", {}, { acl: { others: ['data-read', 'children-list', 'attachment-read', 'subscriptions-write']}, data: { name: this.user } }).promise }
     var createAvatar = () => { return this.connection.sendCreate(this.user + "/social/me/avatar", {}, {}).promise }
     var createSocial = () => { return this.connection.sendCreate(this.user + "/social", {}, {}).promise }
     this.objectExists(this.user + "/social/me/avatar").catch((err) => {

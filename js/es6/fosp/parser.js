@@ -126,7 +126,7 @@ var parseMessageBuffer = function(buffer) {
   console.debug('First ' + i + ' bytes form head ' + string)
   if (i < buffer_length) {
     console.debug('Binary message has body')
-    new_buffer = buffer.slice(i)
+    new_buffer = buffer.subarray(i)
   }
   message = parseHead(string)
   message.body = new_buffer

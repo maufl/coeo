@@ -49,6 +49,10 @@ body {
 
     li {
       cursor: pointer;
+      padding: 5px;
+      & > * {
+        vertical-align: middle;
+      }
     }
     li.active {
       color: $nav-color-active;

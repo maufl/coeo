@@ -80,7 +80,7 @@ export class Message extends EventEmitter {
   }
 
   toString() {
-    if (this.body instanceof ArrayBuffer)
+    if (this.body instanceof ArrayBuffer || this.body instanceof Uint8Array)
       return this.short() + ' :: [binary data]'
     return this.short() + ' :: ' + JSON.stringify(this.body);
   }
