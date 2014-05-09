@@ -17,4 +17,36 @@ export class BuddyListVM extends Array {
       }
     })
   }
+
+  contains(buddy) {
+    var ID = buddy
+    if (buddy instanceof BuddyVM) {
+      ID = buddy.ID
+    }
+    for (var i=0; i< this.length; i++) {
+      if (this[i].ID === ID) {
+        return true
+      }
+    }
+    return false
+  }
+
+  add(buddy) {
+    console.log(buddy)
+    if (typeof buddy === 'string') {
+      var ID = buddy
+    } else if (buddy instanceof BuddyVM) {
+      var ID = buddy.ID
+    } else {
+      return
+    }
+    if (this.contains(ID) || this.client.user === ID) {
+      return
+    }
+    var update = { data: {} }
+    update.data[ID] = { }
+    this.client.connection.sendUpdate(this.client.user + "/config/buddies", {}, update).promise.then(() => {
+      this.push(buddy)
+    })
+  }
 }

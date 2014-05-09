@@ -1,5 +1,6 @@
 import { Client } from 'es6/fosp/client'
 import { BuddyListVM } from 'es6/vm/buddy-list'
+import { BuddyVM } from './buddy'
 import { TreeVM } from './tree'
 import { MeVM } from './me'
 
@@ -15,6 +16,7 @@ export class ClientVM extends Client {
     this.insecure = false
     this.currentTree = null
     this.buddyList = new BuddyListVM(this)
+    this.searchText = ''
 
     ko.track(this)
   }
@@ -62,6 +64,21 @@ export class ClientVM extends Client {
     if (tree instanceof TreeVM) {
       this.currentTree = tree
     }
+  }
+
+  search() {
+    if (this.connection === null) {
+      return
+    }
+    if (this.searchText === this.user) {
+      this.select(this.me)
+      return
+    }
+    this.connection.sendSelect(this.searchText + "/social/me").promise.then(() => {
+      var newBuddy = new BuddyVM(this, this.searchText)
+      newBuddy.load()
+      this.currentTree = newBuddy
+    })
   }
 
   setupProfile() {

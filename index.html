@@ -33,6 +33,11 @@
     </li>
     <!-- /ko -->
   </ul>
+  <div class="nav-section">Search</div>
+  <hr />
+  <ul class="nav-list">
+    <li><input type="text" data-bind='value: client.searchText' placeholder="alice@maufl.de" /><span class='entypo entypo-circled-arrow-right' data-bind='click: client.search.bind(client)'></span></li>
+  </ul>
 </nav>
 <main class="content-main">
 <div class="center" data-bind="if: client.currentTree === null">
@@ -82,6 +87,11 @@
   <div class="user-head content-block">
       <img class="avatar-big" data-bind="imgSrc: client.currentTree.avatar"/>
       <span class="user-name" data-bind="text: client.currentTree.displayName()"></span>
+      <!-- ko ifnot: client.buddyList.contains(client.currentTree) -->
+      <button class="btn" data-bind="click: client.buddyList.add.bind(client.buddyList, client.currentTree)">
+        <span class="entypo entypo-user-add"></span>
+      </button>
+      <!-- /ko -->
   </div>
   <div class="user-body">
   </div>

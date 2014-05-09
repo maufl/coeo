@@ -60,13 +60,18 @@
   src: url("../fonts/entypo.eot");
   src: url("../fonts/entypo.woff") format("woff"), url("../fonts/entypo.ttf") format("truetype"); }
 
-span.entypo {
+.entypo {
   font-family: 'Entypo';
-  font-size: 1.5em;
   display: inline-block;
-  padding: 3px; }
-  span.entypo.entypo-user:after {
+  padding: 3px;
+  line-height: 0.5em;
+  font-size: 40px; }
+  .entypo.entypo-user:before {
     content: '\1F464'; }
+  .entypo.entypo-circled-arrow-right:before {
+    content: '\E75A'; }
+  .entypo.entypo-user-add:before {
+    content: '\E700'; }
 
 @font-face {
   font-family: 'Varela Round';
@@ -138,11 +143,11 @@ body {
   .nav-main .nav-logo {
     text-align: center;
     font-size: 2.5em;
-    margin: 25px 0px 15px 0px;
+    margin: 25px 0px 5px 0px;
     color: white; }
   .nav-main .nav-section {
     font-size: 1.1em;
-    margin: 10px 0px 5px 0px;
+    margin: 20px 0px 5px 0px;
     padding-left: 20px; }
   .nav-main hr {
     border: 1px solid #666666; }
@@ -151,9 +156,9 @@ body {
     margin: 10px 20px;
     font-size: 1.2em; }
     .nav-main ul.nav-list li {
-      cursor: pointer;
       padding: 5px; }
       .nav-main ul.nav-list li > * {
+        cursor: pointer;
         vertical-align: middle; }
     .nav-main ul.nav-list li.active {
       color: white; }

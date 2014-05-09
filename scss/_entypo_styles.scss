@@ -4,14 +4,21 @@
   src: url('../fonts/entypo.woff') format('woff'), url('../fonts/entypo.ttf') format('truetype');
 }
 
-span.entypo {
+.entypo {
   font-family: 'Entypo';
-  font-size: 1.5em;
   display: inline-block;
   padding: 3px;
+  line-height: 0.5em;
+  font-size: 40px;
 
-  &.entypo-user:after {
+  &.entypo-user:before {
     content: '\1F464';
+  }
+  &.entypo-circled-arrow-right:before {
+    content: '\E75A';
+  }
+  &.entypo-user-add:before {
+    content: '\E700';
   }
 }
 
