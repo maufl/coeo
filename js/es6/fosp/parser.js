@@ -94,9 +94,8 @@ var parseMessageString = function(string) {
 var parseMessageBuffer = function(buffer) {
   console.debug('Parsing message buffer');
   var message = null
-  var string = '', buffer_length = (buffer.length || buffer.byteLength), i = 0, new_buffer = null
-  if (buffer instanceof ArrayBuffer)
-    buffer = new Uint8Array(buffer)
+  var string = '', buffer_length = buffer.byteLength, i = 0, new_buffer = null
+  buffer = new Uint8Array(buffer)
   console.debug('Buffer length is ' + buffer_length)
   while (i < buffer_length) {
     var b0 = buffer[i], b1 = buffer[i+1], b2 = buffer[i+2], b3 = buffer[i+3]
@@ -127,9 +126,7 @@ var parseMessageBuffer = function(buffer) {
   console.debug('First ' + i + ' bytes form head ' + string)
   if (i < buffer_length) {
     console.debug('Binary message has body')
-    new_buffer = new Uint8Array(new ArrayBuffer(buffer_length - i))
-    for (var j=0; j<buffer_length - i; j++)
-      new_buffer[j] = buffer[j+i]
+    new_buffer = buffer.slice(i)
   }
   message = parseHead(string)
   message.body = new_buffer
@@ -148,31 +145,24 @@ var messageHashToObject = function( msg) {
 
 export class Parser {}
 
-Parser.parseMessage = (raw, callback) => {
+Parser.parseMessage = (raw) => {
+  var defer = {}, promise = new Promise((res,rej) => { defer.resolve = res; defer.reject = rej })
   try {
     var msg = null;
     if ( raw instanceof ArrayBuffer ) {
       msg = parseMessageBuffer(raw)
-      callback(null, messageHashToObject(msg))
+      defer.resolve(messageHashToObject(msg))
     }
     else if ( typeof raw === 'string' ) {
       msg = parseMessageString(raw)
-      callback(null, messageHashToObject(msg))
+      defer.resolve(messageHashToObject(msg))
     }
-    else if ( typeof Blob === 'function' && raw instanceof Blob ) {
-      var fr = new FileReader()
-      fr.onload = function() {
-        console.log(fr.result)
-        msg = parseMessageBuffer(fr.result)
-        callback(null, messageHashToObject(msg))
-      }
-      fr.readAsArrayBuffer(raw)
+    else {
+      defer.reject(new Error('Unable to parse ' + raw.toString() + ' of type ' + typeof raw))
     }
-    else
-      throw new Error('Unable to parse ' + raw.toString() + ' of type ' + typeof raw)
-
   }
   catch (e) {
-    callback(e, null)
+    defer.reject(e)
   }
+  return promise
 }

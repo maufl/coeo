@@ -17,14 +17,11 @@ export class Connection extends EventEmitter {
 
     var emitMessage = (message) => {
       var data = message.binaryData || message.utf8Data || message.data;
-      var msg = Parser.parseMessage(data, (err, msg) => {
-        if (err) {
-          console.error('Error while parsing message: ' + err)
-          console.error(err.stack)
-          return
-        }
+      var msg = Parser.parseMessage(data).then((msg) => {
         console.debug('Recieved new message: ' + msg.toString());
         this.emit('message', msg);
+      }).catch((err) => {
+        console.error(err.stack)
       })
     }
 

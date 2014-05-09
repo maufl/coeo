@@ -16,6 +16,7 @@ export class Client extends EventEmitter {
     var defer = {}
     var p = new Promise((res, rej) => { defer.resolve = res; defer.reject = rej });
     var ws = new WebSocket(this.scheme + '://' + this.host + ':' + this.port);
+    ws.binaryType = 'arraybuffer'
     ws.onopen = () => {
       this.connection = new Connection(ws);
       this.emit('connect')
