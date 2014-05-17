@@ -70,6 +70,8 @@
     content: '\E75A'; }
   .entypo.entypo-user-add:before {
     content: '\E700'; }
+  .entypo.entypo-reload:before {
+    content: '\1F504'; }
 
 @font-face {
   font-family: 'Varela Round';
@@ -118,6 +120,11 @@ img.avatar-small {
   height: 34px;
   width: 34px;
   border-radius: 17px; }
+
+.button-bar {
+  float: right; }
+  .button-bar span {
+    cursor: pointer; }
 
 * {
   margin: 0px;

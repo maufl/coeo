@@ -76,6 +76,9 @@
 <!-- ko if: client.currentTree.isMe() -->
 <div class="user-content">
   <div class="user-head content-block">
+    <span class="button-bar">
+      <span class="entypo entypo-reload" data-bind='click: client.me.load.bind(client.me)'></span>
+    </span>
     <img class="avatar-big" data-bind="imgSrc: client.me.avatar, drop: { callback: client.me.uploadAvatar.bind(client.me) }, dragenter: { preventDefault: true }, dragover: {preventDefault: true}, dragleave: { preventDefault: true }"/>
     <span class="user-name" data-bind="text: client.me.displayName(), contenteditable: client.me.updateName.bind(client.me)"></span>
   </div>
@@ -86,6 +89,9 @@
 <!-- ko if: client.currentTree.isBuddy() -->
 <div class="user-content">
   <div class="user-head content-block">
+    <span class="button-bar">
+      <span class="entypo entypo-reload" data-bind='click: client.currentTree.load.bind(client.currentTree)'></span>
+    </span>
       <img class="avatar-big" data-bind="imgSrc: client.currentTree.avatar"/>
       <span class="user-name" data-bind="text: client.currentTree.displayName()"></span>
       <!-- ko ifnot: client.buddyList.contains(client.currentTree) -->

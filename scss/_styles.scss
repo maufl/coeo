@@ -64,3 +64,10 @@ img.avatar-small {
   width: 34px;
   border-radius: 17px;
 }
+
+.button-bar {
+  float: right;
+  span {
+    cursor: pointer;
+  }
+}
