@@ -1,4 +1,7 @@
 // Sytles for buttons
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+
 .btn {
   background: #f6f6f6;
   border: 1px solid #ededed;
@@ -15,43 +18,31 @@
 .btn-blue, .btn-green, .btn-yellow, .btn-red, .btn-orange, .btn-petrol {
   @extend .btn;
   color: white;
-  border: 1px solid rgba(0,0,0,0);
+  border: none;
+  &:hover {
+    box-shadow: inset 0 0 5px #888;
+  }
+  &:active {
+    box-shadow: inset 0 0 5px #333;
+  }
 }
 
 .btn-blue {
-  background: adjust-lightness($blue, 10);
-  &:hover {
-    background: $blue;
-  }
+  background: $blue;
 }
 .btn-green {
-  background: adjust-lightness($green, 10);
-  &:hover {
-    background: $green;
-  }
+  background: $green;
 }
 .btn-yellow {
-  background: adjust-lightness($yellow, 10);
-  &:hover {
-    background: $yellow;
-  }
+  background: $yellow;
 }
 .btn-orange {
-  background: adjust-lightness($orange, 10);
-  &:hover {
-    background: $orange;
-  }
+  background: $orange;
 }
 .btn-red {
-  background: adjust-lightness($red, 10);
-  &:hover {
-    background: $red;
-  }
+  background: $red;
 }
 .btn-petrol {
-  background: adjust-lightness($petrol, 10);
-  &:hover {
-    background: $petrol;
-  }
+  background: $petrol;
 }
 
