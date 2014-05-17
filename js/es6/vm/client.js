@@ -17,6 +17,7 @@ export class ClientVM extends Client {
     this.currentTree = null
     this.buddyList = new BuddyListVM(this)
     this.searchText = ''
+    this.loading = false
 
     ko.track(this)
   }
@@ -27,6 +28,14 @@ export class ClientVM extends Client {
     }
     [this.userName, this.host] = this.user.split('@');
     return this.openConnection().then(() => {
+      ko.track(this.connection)
+      ko.getObservable(this.connection, 'pendingRequestNumber').subscribe((newValue) => {
+        if (newValue > 0) {
+          this.loading = true
+        } else {
+          this.loading = false
+        }
+      })
       return this.connection.sendConnect({}, {version: '0.1'}).promise
     })
   }

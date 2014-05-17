@@ -14,6 +14,7 @@ export class Connection extends EventEmitter {
     nextId += 1
     this.currentSeq = 1;
     this.pendingRequests = {};
+    this.pendingRequestNumber = 0;
 
     var emitMessage = (message) => {
       var data = message.binaryData || message.utf8Data || message.data;
@@ -48,6 +49,7 @@ export class Connection extends EventEmitter {
 
     this.on('response', (msg) => {
       var req = this.pendingRequests[msg.seq];
+      this.pendingRequestNumber -= 1;
       delete this.pendingRequests[msg.seq];
       var existsRequest = false;
       if (typeof req !== 'undefined' && req instanceof Request) {
@@ -136,6 +138,7 @@ export class Connection extends EventEmitter {
     var msg = new Request({ type: Message.REQUEST, request: request, uri: uri, seq: this.currentSeq, headers: headers, body: body });
     this.currentSeq++;
     this.pendingRequests[msg.seq] = msg;
+    this.pendingRequestNumber += 1;
     return this.sendMessage(msg);
   }
   sendConnect(headers, body) {

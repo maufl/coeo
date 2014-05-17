@@ -40,6 +40,7 @@
   </ul>
 </nav>
 <main class="content-main">
+<div id='loading-indicator' data-bind='css: { active: client.loading > 0 }'></div>
 <div class="center" data-bind="if: client.currentTree === null">
   <div class="content-block login">
     <div class="content-head">
