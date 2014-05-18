@@ -3,6 +3,7 @@ import { BuddyListVM } from 'es6/vm/buddy-list'
 import { BuddyVM } from './buddy'
 import { TreeVM } from './tree'
 import { MeVM } from './me'
+import { notify } from './notify'
 
 export class ClientVM extends Client {
   constructor() {
@@ -37,6 +38,8 @@ export class ClientVM extends Client {
         }
       })
       return this.connection.sendConnect({}, {version: '0.1'}).promise
+    }).catch((err) => {
+      notify("Failed to open connection to " + this.host + ".")
     })
   }
 
@@ -45,18 +48,26 @@ export class ClientVM extends Client {
   }
 
   login() {
-    this.connect().then(this.authenticate.bind(this)).then(this.postLogin.bind(this)).catch((err) => {
-      console.log("Login failed")
-      console.error(err)
+    this.connect().then(() => {
+      this.authenticate().then(() => {
+        this.postLogin()
+      }).catch((err) => {
+        console.error(err)
+        notify("Login failed. Is the user and the password correct?")
+      })
     })
   }
 
   signup() {
     this.connect().then(() => {
-      return this.connection.sendRegister({}, {name: this.userName, password: this.password}).promise
-    }).then(this.authenticate.bind(this)).then(this.postLogin.bind(this)).catch((err) => {
-      console.log("Sign up failed")
-      console.log(err)
+      this.connection.sendRegister({}, {name: this.userName, password: this.password}).promise.then(() => {
+        this.authenticate().then(() => {
+          this.postLogin()
+        })
+      }).catch((err) => {
+        console.log(err)
+        notify("Sign up failed.")
+      })
     })
   }
 
@@ -87,6 +98,8 @@ export class ClientVM extends Client {
       var newBuddy = new BuddyVM(this, this.searchText)
       newBuddy.load()
       this.currentTree = newBuddy
+    }).catch((err) => {
+      notify("Could not find user " + this.searchText + " or insufficent rights")
     })
   }
 

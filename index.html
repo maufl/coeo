@@ -15,6 +15,9 @@
 <script type='text/html' id='object-viewer-subscriptions' data-template-src='templates/object-viewer-subscriptions.html'></script>
 </head>
 <body>
+<!-- ko if: notification -->
+<div class='notification' data-bind='text: notification.msg'></div>
+<!-- /ko -->
 <nav class="nav-main">
   <div class="nav-logo">coeo</div>
   <div class="nav-section">People</div>
