@@ -13,6 +13,15 @@ ko.bindingHandlers.drop = {
       callback(e)
       return false
     })
+    $(element).on('dragenter', function(e) {
+        e.preventDefault()
+    })
+    $(element).on('dragleave', function(e) {
+        e.preventDefault()
+    })
+    $(element).on('dragover', function(e) {
+        e.preventDefault()
+    })
   }
 },
 ko.bindingHandlers.dragenter = {

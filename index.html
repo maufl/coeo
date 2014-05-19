@@ -12,7 +12,7 @@
 <script type='text/javascript' src='js/es6-module-loader.js'></script>
 <script type='text/javascript' src='js/system.js'></script>
 <script type='text/javascript' src='js/init.js'></script>
-<script type='text/html' id='object-viewer-subscriptions' data-template-src='templates/object-viewer-subscriptions.html'></script>
+<script type='text/html' id='user-view' data-template-src='templates/user-view.html'></script>
 </head>
 <body>
 <!-- ko if: notification -->
@@ -75,70 +75,7 @@
     </div>
   </div>
 </div>
-<!-- ko if: client.currentTree -->
-<!-- ko if: client.currentTree.isMe() -->
-<div class="user-content">
-  <div class="user-head content-block">
-    <span class="button-bar">
-      <span class="entypo entypo-reload" data-bind='click: client.me.load.bind(client.me)'></span>
-    </span>
-    <img class="avatar-big" data-bind="imgSrc: client.me.avatar, drop: { callback: client.me.uploadAvatar.bind(client.me) }, dragenter: { preventDefault: true }, dragover: {preventDefault: true}, dragleave: { preventDefault: true }"/>
-    <span class="user-name" data-bind="text: client.me.displayName(), contenteditable: client.me.updateName.bind(client.me)"></span>
-  </div>
-  <div class="user-body" data-bind='with: client.me.defaultChannel'>
-    <div class='post content-block'>
-      <div class='content-head'>
-        <span>New Post</span>
-      </div>
-      <div class='content-body'>
-        <textarea data-bind='value: newPost.text'></textarea>
-        <button class='btn-blue' data-bind='click: newPost.create.bind(newPost)'>Submit</button>
-      </div>
-    </div>
-    <!-- ko foreach: $data -->
-      <div class='post content-block'>
-        <div class='content-head'>
-          <span data-bind='text: owner'></span>
-          <span class='button-bar'>
-            <span class='entypo entypo-delete' data-bind='click: remove.bind($data)'></span>
-          </span>
-        </div>
-        <div class='content-body'>
-          <span data-bind='text: text'></span>
-        </div>
-      </div>
-    <!-- /ko -->
-  </div>
-</div>
-<!-- /ko -->
-<!-- ko if: client.currentTree.isBuddy() -->
-<div class="user-content">
-  <div class="user-head content-block">
-    <span class="button-bar">
-      <span class="entypo entypo-reload" data-bind='click: client.currentTree.load.bind(client.currentTree)'></span>
-    </span>
-      <img class="avatar-big" data-bind="imgSrc: client.currentTree.avatar"/>
-      <span class="user-name" data-bind="text: client.currentTree.displayName()"></span>
-      <!-- ko ifnot: client.buddyList.contains(client.currentTree) -->
-      <button class="btn" data-bind="click: client.buddyList.add.bind(client.buddyList, client.currentTree)">
-        <span class="entypo entypo-user-add"></span>
-      </button>
-      <!-- /ko -->
-  </div>
-  <div class="user-body" data-bind='with: client.currentTree.defaultChannel'>
-    <!-- ko foreach: $data -->
-      <div class='post content-block'>
-        <div class='content-head'>
-          <span data-bind='text: owner'></span>
-        </div>
-        <div class='content-body'>
-          <span data-bind='text: text'></span>
-        </div>
-      </div>
-    <!-- /ko -->
-  </div>
-</div>
-<!-- /ko -->
+<!-- ko template: { name: "user-view", data: client.currentTree, if: client.currentTree } -->
 <!-- /ko -->
 </main>
 </body>

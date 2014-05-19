@@ -1,0 +1,48 @@
+<div class="user-content">
+  <div class="user-head content-block">
+    <span class="button-bar">
+      <span class="entypo entypo-reload" data-bind='click: load.bind($root.client.currentTree)'></span>
+    </span>
+    <!-- ko if: $data.isMe() -->
+      <img class="avatar-big" data-bind="imgSrc: avatar, drop: { callback: uploadAvatar.bind($root.client.me) }"/>
+      <span class="user-name" data-bind="text: displayName(), contenteditable: updateName.bind($root.client.me)"></span>
+    <!-- /ko -->
+    <!-- ko if: $data.isBuddy() -->
+      <img class="avatar-big" data-bind="imgSrc: avatar"/>
+      <span class="user-name" data-bind="text: displayName()"></span>
+    <!-- /ko -->
+    <!-- ko ifnot: client.buddyList.contains(client.currentTree) || $data.isMe() -->
+    <button class="btn" data-bind="click: $root.client.buddyList.add.bind($root.client.buddyList)">
+      <span class="entypo entypo-user-add"></span>
+    </button>
+    <!-- /ko -->
+  </div>
+  <div class="user-body" data-bind='with: defaultChannel'>
+    <!-- ko if: $root.client.currentTree.isMe() -->
+    <div class='post content-block'>
+      <div class='content-head'>
+        <span>New Post</span>
+      </div>
+      <div class='content-body'>
+        <textarea data-bind='value: newPost.text'></textarea>
+        <button class='btn-blue' data-bind='click: newPost.create.bind(newPost)'>Submit</button>
+      </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko foreach: $data -->
+      <div class='post content-block'>
+        <div class='content-head'>
+          <span data-bind='text: owner'></span>
+          <!-- ko if: $root.client.currentTree.isMe() -->
+          <span class='button-bar'>
+            <span class='entypo entypo-delete' data-bind='click: remove.bind($data)'></span>
+          </span>
+          <!-- /ko -->
+        </div>
+        <div class='content-body'>
+          <span data-bind='text: text'></span>
+        </div>
+      </div>
+    <!-- /ko -->
+  </div>
+</div>
