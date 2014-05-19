@@ -20,12 +20,14 @@
 @mixin flx-h {
   display: flex;
   flex-wrap: nowrap;
+  align-items: stretch;
   flex-direction: row;
 }
 
 @mixin flx-v {
   display: flex;
   flex-wrap: nowrap;
+  align-items: stretch;
   flex-direction: column;
 }
 

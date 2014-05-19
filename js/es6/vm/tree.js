@@ -1,3 +1,4 @@
+import { ChannelVM } from './channel'
 
 var defaultAvatar = new Image();
 defaultAvatar.src = window.location + '/images/defaultAvatar.png';
@@ -8,6 +9,8 @@ export class TreeVM {
     this.name = ''
     this.avatar = defaultAvatar
     this.client = client
+
+    this.defaultChannel = new ChannelVM(this.client, this.ID + '/social/channels/default')
 
     ko.track(this)
   }

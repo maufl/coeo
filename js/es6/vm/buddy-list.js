@@ -32,7 +32,6 @@ export class BuddyListVM extends Array {
   }
 
   add(buddy) {
-    console.log(buddy)
     if (typeof buddy === 'string') {
       var ID = buddy
     } else if (buddy instanceof BuddyVM) {
@@ -47,6 +46,12 @@ export class BuddyListVM extends Array {
     update.data[ID] = { }
     this.client.connection.sendUpdate(this.client.user + "/config/buddies", {}, update).promise.then(() => {
       this.push(buddy)
+    })
+    this.client.connection.sendSelect(this.client.user + "/config/groups", {}, {}).promise.then((resp) => {
+      var buddyList = resp.body.data || {}
+      var friendList = { "friends": buddyList["friends"] || [] }
+      friendList["friends"].push(ID)
+      this.client.connection.sendUpdate(this.client.user + "/config/groups", {}, { data: friendList })
     })
   }
 }

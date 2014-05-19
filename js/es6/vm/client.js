@@ -77,12 +77,14 @@ export class ClientVM extends Client {
     this.select(this.me)
     this.setupProfile()
     this.setupBuddiesGroups()
+    this.setupChannel()
     this.buddyList.load()
   }
 
   select(tree) {
     if (tree instanceof TreeVM) {
       this.currentTree = tree
+      tree.defaultChannel.load()
     }
   }
 
@@ -104,7 +106,7 @@ export class ClientVM extends Client {
   }
 
   setupProfile() {
-    var createMe = () => { return this.connection.sendCreate(this.user + "/social/me", {}, { acl: { others: ['data-read', 'children-list', 'attachment-read', 'subscriptions-write']}, data: { name: this.user } }).promise }
+    var createMe = () => { return this.connection.sendCreate(this.user + "/social/me", {}, { acl: { others: ['data-read', 'children-read', 'attachment-read', 'subscriptions-write']}, data: { name: this.user } }).promise }
     var createAvatar = () => { return this.connection.sendCreate(this.user + "/social/me/avatar", {}, {}).promise }
     var createSocial = () => { return this.connection.sendCreate(this.user + "/social", {}, {}).promise }
     this.objectExists(this.user + "/social/me/avatar").catch((err) => {
@@ -118,6 +120,14 @@ export class ClientVM extends Client {
     var createGroups = () => { return this.connection.sendCreate(this.user + "/config/groups", {}, {}).promise }
     this.objectExists(this.user + "/config/buddies").catch(() => {
       createConfig().then(createGroups,createGroups).then(createBuddies,createBuddies)
+    })
+  }
+
+  setupChannel() {
+    var createChannels = () => { return this.connection.sendCreate(this.user + "/social/channels", {}, {}).promise }
+    var createDefaultChannel = () => { return this.connection.sendCreate(this.user + "/social/channels/default", {}, { acl: { groups: { friends: ['data-read', 'children-read', 'attachment-read', 'subscriptions-write'] }}}).promise }
+    this.objectExists(this.user + "/social/channels/default").catch((err) => {
+      createChannels().then(createDefaultChannel, createDefaultChannel)
     })
   }
 

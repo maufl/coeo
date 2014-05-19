@@ -85,7 +85,26 @@
     <img class="avatar-big" data-bind="imgSrc: client.me.avatar, drop: { callback: client.me.uploadAvatar.bind(client.me) }, dragenter: { preventDefault: true }, dragover: {preventDefault: true}, dragleave: { preventDefault: true }"/>
     <span class="user-name" data-bind="text: client.me.displayName(), contenteditable: client.me.updateName.bind(client.me)"></span>
   </div>
-  <div class="user-body">
+  <div class="user-body" data-bind='with: client.me.defaultChannel'>
+    <div class='post content-block'>
+      <div class='content-head'>
+        <span>New Post</span>
+      </div>
+      <div class='content-body'>
+        <textarea data-bind='value: newPost.text'></textarea>
+        <button class='btn-blue' data-bind='click: newPost.create.bind(newPost)'>Submit</button>
+      </div>
+    </div>
+    <!-- ko foreach: $data -->
+      <div class='post content-block'>
+        <div class='content-head'>
+          <span data-bind='text: owner'></span>
+        </div>
+        <div class='content-body'>
+          <span data-bind='text: text'></span>
+        </div>
+      </div>
+    <!-- /ko -->
   </div>
 </div>
 <!-- /ko -->
@@ -103,7 +122,17 @@
       </button>
       <!-- /ko -->
   </div>
-  <div class="user-body">
+  <div class="user-body" data-bind='with: client.currentTree.defaultChannel'>
+    <!-- ko foreach: $data -->
+      <div class='post content-block'>
+        <div class='content-head'>
+          <span data-bind='text: owner'></span>
+        </div>
+        <div class='content-body'>
+          <span data-bind='text: text'></span>
+        </div>
+      </div>
+    <!-- /ko -->
   </div>
 </div>
 <!-- /ko -->

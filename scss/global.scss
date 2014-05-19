@@ -11,17 +11,17 @@
   font-family: 'Varela Round', Verdana, Arial, sans-serif;
 }
 
-html, body {
+html {
   height: 100%;
 }
 
 body {
   @include flx-h();
+  min-height: 100%;
 }
 
 .nav-main {
   width: $main-nav-width;
-  height: 100%;
   background: $main-nav-background-color;
   color: $nav-color-inactive;
 
@@ -64,7 +64,6 @@ body {
 .content-main {
   background: $main-content-background-color;
   @include flx-strech();
-  height: 100%;
   position: relative;
 }
 

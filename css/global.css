@@ -80,7 +80,7 @@
 .content-block {
   background: white;
   border-radius: 2px;
-  display: inline-block;
+  display: block;
   box-shadow: 0px 0px 3px #ddd; }
   .content-block .content-head {
     border-bottom: 1px solid #eee;
@@ -141,23 +141,28 @@ img.avatar-small {
   box-shadow: 0 0 3px 1px #666;
   font-size: 0.85em; }
 
+.post {
+  width: 300px;
+  margin: 10px auto; }
+
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
   font-family: 'Varela Round', Verdana, Arial, sans-serif; }
 
-html, body {
+html {
   height: 100%; }
 
 body {
   display: flex;
   flex-wrap: nowrap;
-  flex-direction: row; }
+  align-items: stretch;
+  flex-direction: row;
+  min-height: 100%; }
 
 .nav-main {
   width: 300px;
-  height: 100%;
   background: #222222;
   color: #666666; }
   .nav-main .nav-logo {
@@ -187,7 +192,6 @@ body {
   background: #f6f6f6;
   flex-grow: 1;
   flex-shrink: 1;
-  height: 100%;
   position: relative; }
 
 .login {
