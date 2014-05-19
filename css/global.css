@@ -72,6 +72,8 @@
     content: '\E700'; }
   .entypo.entypo-reload:before {
     content: '\1F504'; }
+  .entypo.entypo-delete:before {
+    content: '\274C'; }
 
 @font-face {
   font-family: 'Varela Round';

@@ -99,6 +99,9 @@
       <div class='post content-block'>
         <div class='content-head'>
           <span data-bind='text: owner'></span>
+          <span class='button-bar'>
+            <span class='entypo entypo-delete' data-bind='click: remove.bind($data)'></span>
+          </span>
         </div>
         <div class='content-body'>
           <span data-bind='text: text'></span>

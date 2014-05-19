@@ -1,6 +1,10 @@
 import { PostVM } from './post'
 import { notify } from './notify'
 
+var comparePosts = (a,b) => {
+  return a.mtime > b.mtime
+}
+
 export class ChannelVM extends Array {
   constructor(client, url) {
     this.client = client
@@ -25,9 +29,22 @@ export class ChannelVM extends Array {
         this.push(p)
         this.loadedPosts.push(posts[i])
       }
+      this.sort(comparePosts)
     }).catch((err) => {
       console.log(err)
       notify("Could not fetch posts")
+    })
+  }
+
+  removePost(post) {
+    if (! post instanceof PostVM) {
+      return
+    }
+    this.client.connection.sendDelete(post.url).promise.then(() => {
+      var index = this.indexOf(post)
+      if (index >= 0) {
+        this.splice(index, 1)
+      }
     })
   }
 

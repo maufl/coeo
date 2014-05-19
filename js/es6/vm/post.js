@@ -40,4 +40,8 @@ export class PostVM {
     })
   }
 
+  remove() {
+    this.channel.removePost(this)
+  }
+
 }
