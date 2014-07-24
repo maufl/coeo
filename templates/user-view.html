@@ -33,6 +33,7 @@
       <div class='post content-block'>
         <div class='content-head'>
           <span data-bind='text: owner'></span>
+          <span data-bind='prettyTime: btime'></span>
           <!-- ko if: $root.client.currentTree.isMe() -->
           <span class='button-bar'>
             <span class='entypo entypo-delete' data-bind='click: remove.bind($data)'></span>
