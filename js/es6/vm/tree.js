@@ -30,6 +30,7 @@ export class TreeVM {
   load() {
     this.loadName()
     this.loadAvatar()
+    this.defaultChannel.load()
   }
 
   loadName() {
